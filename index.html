@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAR-CROSS’D! // Issue N° 1</title>
+    <style>
+        /* --- Y2K GLOBAL STYLES & FONTS --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000214;
+            color: #ffffff;
+            font-family: "Comic Sans MS", "Chalkboard SE", "Arial Rounded MT Bold", sans-serif;
+            overflow-x: hidden;
+            background-image: radial-gradient(#1e003a 15%, transparent 15%),
+                              radial-gradient(#001f3f 15%, transparent 15%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+
+        /* --- PRINT REPLICATED CONTAINER --- */
+        .magazine-wrapper {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            color: #000000;
+            border: 8px solid #00ffcc;
+            box-shadow: 0px 0px 30px #ff007f, 10px 10px 0px #ff007f;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        /* --- FRONT COVER COVER / HEADER --- */
+        .cover-masthead {
+            background: linear-gradient(135deg, #ff007f, #00d4ff);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 6px solid #ffff00;
+            position: relative;
+        }
+
+        .logo-title {
+            font-size: 4.5rem;
+            color: #ffffff;
+            text-shadow: 4px 4px 0px #ff007f, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000, 2px 2px 0px #000, 6px 6px 0px #ffff00;
+            letter-spacing: 2px;
+            transform: rotate(-2deg);
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .cover-sub {
+            font-size: 1.3rem;
+            background: #ffff00;
+            color: #000000;
+            display: inline-block;
+            padding: 5px 15px;
+            font-style: italic;
+            font-weight: bold;
+            transform: rotate(1deg);
+            box-shadow: 4px 4px 0px #000;
+            margin-top: 10px;
+        }
+
+        /* --- RETRO NAVIGATION STICKERS --- */
+        .sticker-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 20px;
+            background: #111;
+            border-bottom: 4px solid #ff007f;
+        }
+
+        .sticker-btn {
+            background: #ffff00;
+            color: #000000;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            border: 3px solid #000;
+            box-shadow: 3px 3px 0px #ff007f;
+            transition: all 0.2s ease;
+        }
+
+        .sticker-btn:hover {
+            transform: scale(1.1) rotate(-3deg);
+            background: #00ffcc;
+            box-shadow: 3px 3px 0px #ffff00;
+        }
+
+        /* --- MAIN CONTENT & SPREADS --- */
+        .page-content {
+            padding: 40px 30px;
+        }
+
+        .editorial-box {
+            background: #ffe6f2;
+            border: 4px dashed #ff007f;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .editorial-box h3 {
+            color: #ff007f;
+            margin-bottom: 10px;
+            font-size: 1.6rem;
+        }
+
+        /* --- SECTION BOXES --- */
+        .section-divider {
+            background: #000;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 40px 0 20px 0;
+            border-left: 10px solid #00ffcc;
+            box-shadow: 4px 4px 0px #ff007f;
+        }
+
+        .article-card {
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            background: #ffffff;
+            box-shadow: 6px 6px 0px #000;
+        }
+
+        .nature-theme { border-color: #00ffcc; background: #f0fffa; }
+        .science-theme { border-color: #ff00ff; background: #faf0ff; }
+        .gossip-theme { border-color: #ffff00; background: #ffffe0; box-shadow: 6px 6px 0px #ff007f; }
+
+        h2.article-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #111;
+            line-height: 1.2;
+        }
+
+        .article-card p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* --- PHOTO PLACEHOLDERS --- */
+        .photo-frame {
+            background: #e0e0e0;
+            border: 3px solid #000;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #555;
+            margin: 15px 0;
+            border-radius: 4px;
+            box-shadow: 4px 4px 0px #888;
+            background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), 
+                              linear-gradient(-45deg, #ccc 25%, transparent 25%), 
+                              linear-gradient(45deg, transparent 75%, #ccc 75%), 
+                              linear-gradient(-45deg, transparent 75%, #ccc 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 15px 15px 35px 15px;
+            border: 2px solid #ccc;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+            transform: rotate(-1.5deg);
+            max-width: 320px;
+            margin: 20px auto;
+        }
+
+        /* --- INTERACTIVE MEDIA PLAYER CARD --- */
+        .mp3-player {
+            background: linear-gradient(#333, #111);
+            color: #00ffcc;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            border: 2px solid #00ffcc;
+            margin-top: 15px;
+            box-shadow: inset 0 0 10px #000;
+        }
+
+        .mp3-screen {
+            background: #002211;
+            padding: 8px;
+            border-radius: 50px;
+            border: 1px solid #00ffcc;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        /* --- INTERACTIVE QUIZ DESIGN --- */
+        .quiz-container {
+            background: #fdf6e2;
+            border: 4px dashed #ffaa00;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+
+        .quiz-question {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #000;
+            box-shadow: 3px 3px 0px #000;
+        }
+
+        .quiz-question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .quiz-options label {
+            display: block;
+            background: #f0f0f0;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            transition: background 0.2s;
+        }
+
+        .quiz-options label:hover {
+            background: #ffe0b3;
+        }
+
+        .quiz-options input {
+            margin-right: 10px;
+        }
+
+        .quiz-btn {
+            display: block;
+            width: 100%;
+            background: #ff007f;
+            color: #fff;
+            padding: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: 3px solid #000;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+            text-transform: uppercase;
+        }
+
+        .quiz-btn:hover {
+            background: #00ffcc;
+            color: #000;
+        }
+
+        #quiz-result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #ffffff;
+            border: 3px dashed #00ffcc;
+            border-radius: 10px;
+            display: none;
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+
+        /* --- THE SAVAGE ADVICE COLUMN LAYOUT --- */
+        .advice-item {
+            background: #fdfdfd;
+            border-left: 6px solid #ff007f;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .user-q {
+            font-style: italic;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .lady-a {
+            background: #fff0f5;
+            padding: 12px;
+            border-radius: 6px;
+            color: #000;
+            border: 1px solid #ffb6c1;
+        }
+
+        /* --- CONTRAPORTADA / FOOTER --- */
+        .print-footer {
+            background: #000000;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            border-top: 6px solid #00ffcc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="magazine-wrapper">
+        
+        <header class="cover-masthead">
+            <h1 class="logo-title">STAR-CROSS’D!</h1>
+            <br>
+            <p class="cover-sub">Your Ultimate Dose of Gothic Drama & 19th-Century Archetypes</p>
+        </header>
+
+        <nav class="sticker-nav">
+            <a href="#editorial" class="sticker-btn">📝 Manifesto</a>
+            <a href="#nature" class="sticker-btn">🌿 Romantic Spirit</a>
+            <a href="#science" class="sticker-btn">🧪 Mad Science</a>
+            <a href="#gossip" class="sticker-btn">🤫 Gossip Zone</a>
+            <a href="#advice" class="sticker-btn">🎩 Lady Bracknell</a>
+            <a href="#quiz" class="sticker-btn">🧠 Super Quiz</a>
+        </nav>
+
+        <main class="page-content">
+
+            <section id="editorial" class="editorial-box">
+                <h3>From the Editors' Desks 📝</h3>
+                <p>OMG, welcome to the premiere digital deployment of <strong>STAR-CROSS'D!</strong> 💖 This issue, we are completely losing our heads over the undisputed kings and queens of high literary drama. We're tearing through the beautiful chaos of the human soul, and honestly, we didn't hold back single asset.</p>
+                <div class="polaroid">
+                    <div class=><img src="editores.jpg" height="250" width="250"></div>
+                </div>
+                <p>Are you a nature-worshipping daydreamer, a reckless mad scientist who leaves people on read, a toxic brooding soul pacing the muddy fields, or an elite master of the double life? We have the fresh receipts from the moors, savage high-society manuals, and an interactive matching engine ready below. Turn the page, besties! <em>— Azael & Victoria xoxo</em></p>
+            </section>
+
+            <section id="nature">
+                <div class="section-divider">🌿 Section 1: Romantic Musings</div>
+                
+                <div class="article-card nature-theme">
+                    <h2 class="article-title">Wordsworth’s Ultimate Hack for When You're Feeling Totally "Out" (Spoiler: It Involves Flowers)</h2>
+                    <div class=><img src="WhatsApp Image 2026-06-28 at 19.18.59.jpeg" height="250" width="400"></div>
+                    <p>Are you spending way too much time locked in your room, and modern societal structures have you feeling completely <em>out</em>? Don't panic, because William Wordsworth has the absolute blueprint for your mental health! In his classic chart-topping poetic hit <em>The Daffodils</em>, he shares that whenever he’s lying on his couch feeling empty, low, or in a "vacant and pensive mood," his instant remedy is visual simulation—recalling a massive field of golden flowers dancing by a stormy lake.</p>
+                    <p>Yes, you read that right! The trick is manually activating your <strong>"inward eye."</strong> Think of your brain like a virtual photo album or a custom desktop theme grid. Store your happiest, prettiest natural memories in there and deploy them the second real life gets too annoying. Nature literally cures the drama!</p>
+                    <p style="font-weight: bold; color: #ff007f; text-align: center; font-style: italic; margin-top: 15px;">"They flash upon that inward eye / Which is the bliss of solitude!" — William W.</p>
+                </div>
+
+                <div class="article-card nature-theme">
+                    <h2 class="article-title">Style Clash: Byron’s Heavenly Muse vs. Cathy Earnshaw. Are You "Soft" or "Hardcore"?</h2>
+                    <p>Lord Byron is officially melting over his latest crush in his track <em>She Walks in Beauty</em>. He claims his dream girl operates in a flawless, delicate mix of light and dark (<em>"all that's best of dark and bright"</em>). It is the ultimate soft-girl aesthetic! We're talking inner peace, zero public call-outs, serene thoughts, and a completely innocent heart.</p>
+                    <p>But if you live for extreme environmental chaos, you need to sync vibes with Cathy Earnshaw from <em>Wuthering Heights</em>. She completely rejects the soft aesthetic and goes full <strong>Hardcore Gothic</strong>. Cathy wants to run wild through the muddy, windswept Yorkshire moors with tangled hair, screaming into lightning storms. She doesn’t want a peaceful lover; she demands wild, destructive passion with Heathcliff, even if it burns the entire map down.</p>
+                    <div class="mp3-player">
+                        <div class="mp3-screen"><img src="WhatsApp Image 2026-06-25 at 18.20.39.jpeg" height="55"></div>
+                        <div style="text-align: center; font-size: 0.8rem; color: #aaa;">[ ⏪ PREV ] &nbsp; [ ■ STOP ] &nbsp; [ ⏸ PAUSE ]</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="science">
+                <div class="section-divider">🧪 Section 2: Mad Labs & Misunderstood Fiends</div>
+                
+                <div class="article-card science-theme">
+                    <h2 class="article-title">Toxic Boyfriend Alert! When Your Crush Cares More About His Lab Than You</h2>
+
+                    <p>Girls, we need to have a serious conversation about the biggest red flags of the 19th-century scientific community! Some guys are totally amazing until they secure an experimental grant and completely ghost your existence. Let's look at Aylmer from the short story <em>The Birth-Mark</em>. His wife Georgiana is a literal runway-ready supermodel, but he cannot handle the fact that she has a tiny, hand-shaped birthmark on her left cheek. Instead of loving her flaws, he locks himself away to manipulate her biology. Spoiler alert: his obsession ruins everything and she pays the ultimate price.</p>
+                    <img src="WhatsApp Image 2026-06-28 at 18.52.09.jpeg" height="250" width=" 450">
+                    <p>And don't even get us started on Victor Frankenstein. This overachiever tries to cheat mortality using raw electricity and old anatomical scrap tissue, launching a literal walking disaster. The takeaway? If your crush spends his entire weekend experimenting in his garage instead of taking you out... <strong>RUN!</strong> Abstract science will not give you its jacket when it's cold outside.</p>
+                </div>
+                <div class="article-card science-theme">
+                    <h2 class="article-title">Frankenstein's Creature Opens Up: "Nobody Understands My Vibe"</h2>
+                    <div class=> <img src="WhatsApp Image 2026-06-28 at 19.36.22.jpeg" height="250" width="500"></div>
+                    <p>We scored an exclusive interview with the Creature. Forget the unverified rumors about him being a brainless, grunting zombie—this boy has deep feelings, reads classical philosophy, and speaks like an absolute poet! The total tragedy is that everyone judges him purely based on his cosmetic stitches. High society is so incredibly superficial!</p>
+                    <div class="mp3-player">
+                        <div class="mp3-screen"><img src="WhatsApp Image 2026-06-25 at 18.20.39 (2).jpeg" height="55"></div>
+                        <div style="text-align: center; font-size: 0.8rem; color: #aaa;">[ ⏪ PREV ] &nbsp; [ ■ STOP ] &nbsp; [ ⏸ PAUSE ]</div>
+                </div>
+            </section>
+
+            <section id="gossip">
+                <div class="section-divider">🤫 Section 3: The Gossip Zone</div>
+                <div class="article-card gossip-theme">
+                    <h2 class="article-title" style="color: #ff007f; text-align: center;">🔥 Hot Receipts &amp; Blind Items from the Moors! 🔥</h2>
+                    <p><strong>HEARTBREAK AT THE MANOR!</strong> Sources close to the estate confirm that Catherine Earnshaw has officially dumped her brooding, bad-boy soulmate, Heathcliff! Rumor has it she’s marrying the ultra-rich, clean-cut Edgar Linton just for the social upgrade. Insiders say Heathcliff fled the village in a total rage, vowing to make millions and ruin everyone's life upon his return. <em>Oh. My. God.</em></p>
+                                        <div class=> <img src="WhatsApp Image 2026-06-28 at 19.27.29.jpeg" height="250" width="500"></div>
+                                        <p>Catherine Eranshaw sneaking off to the Linton mansion</p>
+                    <hr style="margin: 15px 0; border: 1px dashed #ff007f;">
+                    <p><strong>DOUBLE LIFE EXPOSED!</strong> Who is the real Ernest?! Our cameras caught Jack Worthing partying in London under a completely fake name just to go clubbing with Algernon Moncrieff. It turns out "Ernest" doesn't even exist—it's just a tactical lie to ditch his family responsibilities in the country! They call it "Bunburying." What are their girlfriends gonna do when they find out they fell in love with a totally made-up identity? Total drama is brewing!</p>
+                </div>
+                 <div class="mp3-player">
+                        <div class="mp3-screen"><img src="WhatsApp Image 2026-06-25 at 18.20.40(1).jpeg" height="55"></div>
+                        <div style="text-align: center; font-size: 0.8rem; color: #aaa;">[ ⏪ PREV ] &nbsp; [ ■ STOP ] &nbsp; [ ⏸ PAUSE ]</div>
+            </section>
+
+            <section id="advice">
+                <div class="section-divider">🎩 Section 4: Lady Bracknell’s Handbook</div>
+                <div class="article-card" style="border-color: #000; background: #fafafa;">
+                    <h2 class="article-title">Savage Etiquette Column: Surviving High Society Without Dropping Your Tiara</h2>
+                    <p>Having total drama with your crush's elite parents? Are they treating you like you're totally uncool? Don't cry! The absolute queen of Victorian capital and uncompromising classism, Lady Bracknell, is here to handle your user-submitted issues with raw truth and extreme aristocratic shade.</p>
+                                        <img src="WhatsApp Image 2026-06-28 at 20.06.27.jpeg" height="250" width="250">
+                    <div class="advice-item">
+                        <p class="user-q">💬 "Hey Lady B! My parents lost me as a baby and I was raised inside a leather handbag found at a train station. But I’m super rich now! Do I have a shot with my dream girl?" — Jack_Earnest95</p>
+                        <p class="lady-a"><strong>Lady B:</strong> "Please, Mr. Worthing! To lose one parent may be regarded as a misfortune; to lose both looks like carelessness. But to be born in a handbag in the cloak-room of Victoria Station? That sounds like a fashion disaster, not a family tree! I highly suggest you produce at least one parent before the party season ends, because my daughter will never marry into a piece of luggage!"</p>
+                    </div>
+
+                    <div class="advice-item">
+                        <p class="user-q">💬 "Lady B, I'm literally only 18, but whenever I go to cool VIP parties, I tell everyone I'm 20 so I sound more interesting. Is it bad to tweak the truth?" — Cecily_CuteXOXO</p>
+                        <p class="lady-a"><strong>Lady B:</strong> "You are perfectly right, sweet child! In fact, no woman should ever be quite accurate about her age. It looks so calculating! A little makeover for the truth shows that you respect public appearances, which is everything in this world."</p>
+                    </div>
+
+                    <div class="advice-item">
+                        <p class="user-q">💬 "Dear Lady B, my boyfriend tells me that being clueless is uncool and that I need to study twenty-four hours a week to be smart..." — Anonymous_Babe</p>
+                        <p class="lady-a"><strong>Lady B:</strong> "Dump him immediately! I do not approve of anything that tampers with natural ignorance. Ignorance is like a delicate exotic fruit; touch it and the bloom is gone! In high society, deep education is a dangerous trend that causes social chaos. Focus on your wardrobe instead, darling!"</p>
+                    </div>
+                     <div class="mp3-player">
+                        <div class="mp3-screen"><img src="WhatsApp Image 2026-06-25 at 18.20.40(2).jpeg" height="55"></div>
+                        <div style="text-align: center; font-size: 0.8rem; color: #aaa;">[ ⏪ PREV ] &nbsp; [ ■ STOP ] &nbsp; [ ⏸ PAUSE ]</div>
+                </div>
+            </section>
+
+            <section id="quiz" class="quiz-container">
+                <h2 style="text-align: center; margin-bottom: 20px; color: #ffaa00; font-size: 2rem; text-shadow: 2px 2px 0px #000;">🧠 THE INTERACTIVE SUPER QUIZ</h2>
+                <p style="text-align: center; margin-bottom: 25px; font-weight: bold;">What kind of deep literary obsession is ruling your love life?</p>
+                
+                <form id="magazineQuiz">
+                    <div class="quiz-question">
+                        <p>1. You are hosting a party and notice a tiny, almost invisible water stain on a glass.</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1" value="A"> You completely lose it. Imperfection ruins the whole night.</label>
+                            <label><input type="radio" name="q1" value="B"> You smash the glass against the wall and curse fate loudly.</label>
+                            <label><input type="radio" name="q1" value="C"> You research how to fuse glass atoms to eliminate the flaw.</label>
+                            <label><input type="radio" name="q1" value="D"> You invent an imaginary sick friend to escape the party entirely.</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p>2. The person you love dates someone else due to social status or money.</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2" value="A"> You obsess over an absolute moral and physical ideal of beauty.</label>
+                            <label><input type="radio" name="q2" value="B"> You swear eternal vengeance and ask their ghost to haunt you.</label>
+                            <label><input type="radio" name="q2" value="C"> You decide human emotions are trash and focus entirely on biology.</label>
+                            <label><input type="radio" name="q2" value="D"> You change your name, create a double life, and use witty irony.</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p>3. What is your ideal refuge when high school stress completely overwhelms you?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3" value="A"> A pristine, minimalist room with zero physical flaws.</label>
+                            <label><input type="radio" name="q3" value="B"> A solitary walk under a wild storm on a bleak moor.</label>
+                            <label><input type="radio" name="q3" value="C"> Your lab workstation chasing a revolutionary idea until dawn.</label>
+                            <label><input type="radio" name="q3" value="D"> A high-society gala where you can eat fancy snacks and judge people.</label>
+                        </div>
+                    </div>
+
+                    <button type="button" class="quiz-btn" onclick="calculateResult()">Calculate My Archetype! ✨</button>
+                </form>
+
+                <div id="quiz-result"></div>
+            </section>
+
+        </main>
+
+        <footer class="print-footer">
+            <p style="font-weight: bold; margin-bottom: 10px;">STAR-CROSS'D! // Issue N° 1</p>
+            <p></p>
+            <p style="color: #00ffcc; margin-top: 15px; font-weight: bold;">🌟 COMING NEXT MONTH: Issue N° 2: The Pre-Raphaelite Stare &amp; Blake's Industrial Poetry!</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function calculateResult() {
+            const form = document.getElementById('magazineQuiz');
+            const data = new FormData(form);
+            
+            let counts = { A: 0, B: 0, C: 0, D: 0 };
+            let totalAnswered = 0;
+
+            for (let value of data.values()) {
+                counts[value]++;
+                totalAnswered++;
+            }
+
+            if (totalAnswered < 3) {
+                alert("Oh no! Don't leave us hanging, answer all the questions to find your vibe! 💕");
+                return;
+            }
+
+            // Find the highest score
+            let maxType = 'A';
+            for (let type in counts) {
+                if (counts[type] > counts[maxType]) {
+                    maxType = type;
+                }
+            }
+
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.style.display = 'block';
+
+            let title = "";
+            let description = "";
+
+            if (maxType === 'A') {
+                title = "💅 The Aesthetic Obsessive (Byron Mood)";
+                description = "Your obsession is absolute perfection. You seek the ideal, flawless harmony of 'She Walks in Beauty'. Just be careful, bestie: you risk destroying real, present happiness by chasing an unachievable abstract ideal!";
+            } else if (maxType === 'B') {
+                title = "🖤 The Wild Rebel of the Moors (Cathy & Heathcliff Vibe)";
+                description = "You are a dark romantic in your purest, most chaotic state. Your passions know zero middle ground: you either love with an intensity that devours the soul or you spend years plotting epic revenges!";
+            } else if (maxType === 'C') {
+                title = "⚡ The Tech-Geek Promethean (Aylmer & Frankenstein Team)";
+                description = "Your mind is trapped in the absolute future, constantly challenging the boundaries of nature. Your obsession is control, structure, and knowledge, meaning you sometimes completely ghost your human relationships!";
+            } else if (maxType === 'D') {
+                title = "🎩 The Master of Bunburying (Lady Bracknell Approved)";
+                description = "Tragic passions or dark, messy laboratories? Gross, absolutely not. Your obsession is surviving high society with flawless style! Your greatest weapons are deep irony, incredible wardrobe assets, and beautiful double lives.";
+            }
+
+            resultDiv.innerHTML = `<strong>Your Archetype Match:</strong><br><span style="color:#ff007f; font-size:1.4rem;">${title}</span><br><br>${description}`;
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
